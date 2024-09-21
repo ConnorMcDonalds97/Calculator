@@ -23,6 +23,7 @@ function divide(num1,num2){
     }
 }
 
+var operation  = "" // operation will be a string that will be processed later into its individual operands and operator
 var num1
 var operator
 var num2
@@ -61,23 +62,27 @@ for (let i = 0; i<10; i++){
     let digitButton = document.createElement("button")
     digitButton.textContent = i
     digitButton.setAttribute("style","cursor: pointer")
+    digitButton.addEventListener("click", function(){
+        operation += digitButton.textContent
+    })
     numberButtons.appendChild(digitButton)
 }
 
 // Adding operation buttons to the operationButtons div
 let operations = ["+","-","x","/"]
+let wordVersion = {
+    "+":"plus",
+    "-":"minus",
+    "x":"multiply",
+    "/":"divide"
+}
 for (let i = 0; i < operations.length; i++){
     let opButton = document.createElement("button")
     opButton.textContent = operations[i]
-    opButton.setAttribute("style",`cursor: pointer, class: ${operations[i]}`)
+    opButton.setAttribute("style","cursor: pointer")
+    opButton.setAttribute("id", wordVersion[operations[i]])
     operationButtons.appendChild(opButton)
 }
-
-// Now setting listnerEvents for their functions
-const plus = document.querySelector(".+")
-plus.addEventListener("click", function(){
-    let result = add(num1,num2)
-})
 
 let equals = document.createElement("button")
 equals.textContent = "="
@@ -88,5 +93,27 @@ let clear = document.createElement("button")
 clear.textContent = "clear"
 clear.setAttribute("style","cursor: pointer")
 miscButtons.appendChild(clear)
+
+
+// Now setting listenerEvents for their functions
+const plus = document.querySelector("#plus")
+plus.addEventListener("click", function(){
+    operation += plus.textContent
+})
+
+const minus = document.querySelector("#minus")
+minus.addEventListener("click", function(){
+    operation += minus.textContent
+})
+
+const mult = document.querySelector("#multiply")
+mult.addEventListener("click", function(){
+    operation += mult.textContent
+})
+
+const divi = document.querySelector("#divide")
+divi.addEventListener("click", function(){
+    operation += divi.textContent
+})
 
 
