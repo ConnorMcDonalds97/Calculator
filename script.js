@@ -57,11 +57,17 @@ const miscButtons = document.createElement("div") // miscellaneous buttons such 
 miscButtons.classList.add("misc")
 body.appendChild(miscButtons)
 
+const display = document.createElement("div")
+display.classList.add("display")
+body.appendChild(display)
+
+
 // Adding digit buttons to the numberButtons div
 for (let i = 0; i<10; i++){ 
     let digitButton = document.createElement("button")
     digitButton.textContent = i
     digitButton.setAttribute("style","cursor: pointer")
+    digitButton.setAttribute("id",i)
     digitButton.addEventListener("click", function(){
         operation += digitButton.textContent
     })
@@ -70,20 +76,15 @@ for (let i = 0; i<10; i++){
 
 // Adding operation buttons to the operationButtons div
 let operations = ["+","-","x","/"]
-let wordVersion = {
-    "+":"plus",
-    "-":"minus",
-    "x":"multiply",
-    "/":"divide"
-}
 for (let i = 0; i < operations.length; i++){
     let opButton = document.createElement("button")
     opButton.textContent = operations[i]
     opButton.setAttribute("style","cursor: pointer")
-    opButton.setAttribute("id", wordVersion[operations[i]])
+    opButton.setAttribute("id", operations[i])
     operationButtons.appendChild(opButton)
 }
 
+// Creating equals and clear button
 let equals = document.createElement("button")
 equals.textContent = "="
 equals.setAttribute("style","cursor: pointer")
@@ -96,24 +97,52 @@ miscButtons.appendChild(clear)
 
 
 // Now setting listenerEvents for their functions
-const plus = document.querySelector("#plus")
+const plus = document.getElementById("+")
 plus.addEventListener("click", function(){
     operation += plus.textContent
+    display.textContent = operation
 })
 
-const minus = document.querySelector("#minus")
+const minus = document.getElementById("-")
 minus.addEventListener("click", function(){
     operation += minus.textContent
+    display.textContent = operation
 })
 
-const mult = document.querySelector("#multiply")
+const mult = document.getElementById("x")
 mult.addEventListener("click", function(){
     operation += mult.textContent
+    display.textContent = operation
 })
 
-const divi = document.querySelector("#divide")
+const divi = document.getElementById("/")
 divi.addEventListener("click", function(){
     operation += divi.textContent
+    display.textContent = operation
 })
+
+const number0 = document.getElementById("0")
+number0.addEventListener("click", function(){
+    operation += number0.textContent
+    display.textContent = operation
+})
+
+//FIX THE NUMBER BUTTONS
+
+/*let numberChildren = numberButtons.childNodes;
+
+numberChildren.forEach(element => {
+    element.addEventListener("click", function(){
+        operation += element.textContent
+        display.textContent = operation
+    })
+})
+for (let i = 0; i < 10; i++){
+    let tempButton = document.getElementById(`${i}`)
+    tempButton.addEventListener("click", function(){
+        operation += tempButton.textContent
+        display.textContent = operation
+    })
+}*/
 
 
